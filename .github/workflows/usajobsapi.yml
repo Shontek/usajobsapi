@@ -27,14 +27,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - shell: bash
-        env:
+        env: |
           SECRETKEY: ${{ secrets.AUTH_KEY }}
           SECRETAGENT: ${{ secrets.USER_AGENT }}
       # Runs a set of commands using the runners shell
       - name: API Call
         run: |
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" https://data.usajobs.gov/api/search -o usajobsdata.json
-          git config --global user.name "GitHub Action"
-          git config --global user.email "devstoneapps@gmail.com"
-          git add usajobsdata.json
-          git commit -m "USA Jobs API fetching"
