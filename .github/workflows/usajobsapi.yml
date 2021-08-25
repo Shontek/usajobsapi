@@ -29,6 +29,10 @@ jobs:
       - name: API Call
         run: |
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" https://data.usajobs.gov/api/search -o usajobsdata.json
+          git config --global user.name "GitHub Action"
+          git config --global user.email "devstoneapps@gmail.com"
+          git add usajobsdata.json
+          git commit -m "USA Jobs API fetching"
         env:
           SECRETKEY: ${{ secrets.AUTH_KEY }}
           SECRETAGENT: ${{ secrets.USER_AGENT }}
