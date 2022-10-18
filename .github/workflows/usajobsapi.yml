@@ -29,9 +29,11 @@ jobs:
       - name: API Call
         run: |
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=DD&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobsdata.json
+          curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=DD;NV;AR;AF&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count.json
           git config --global user.name "GitHub Action"
           git config --global user.email "devstoneapps@gmail.com"
           git add usajobsdata.json
+          git add usajobs_Count.json
           git commit -m "USA Jobs API fetching"
           git push
         env:
