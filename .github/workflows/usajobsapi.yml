@@ -35,7 +35,7 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "devstoneapps@gmail.com"
           git add usajobsdata.json
-          git usajobs_Count_DD_NV.json
+          git add usajobs_Count_DD_NV.json
           git add usajobs_Count_AF.json
           git add usajobs_Count_AR.json
           git commit -m "USA Jobs API fetching"
