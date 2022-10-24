@@ -25,10 +25,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: API Call
         run: |
-          curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=DD;NV;AF;AR&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobsdata.json
+          curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=DD;NV;AF;AR&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=500' -o usajobsdata.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=DD;NV&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_DD_NV.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=AF&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_AF.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" 'https://data.usajobs.gov/api/search?Organization=AR&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_AR.json
