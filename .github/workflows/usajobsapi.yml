@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: API Call
         run: |
-          curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=DD;NV;AF;AR&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=300' -o usajobsdata_all.json
+          curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=DD;NV;AF;AR&Fields=min&SortField=location&RemoteIndicator=False&SortDirection=Asc&ResultsPerPage=9000' -o usajobsdata_all.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=DD;NV&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_DD_NV.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=AF&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_AF.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=AR&Fields=min&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Count_AR.json
