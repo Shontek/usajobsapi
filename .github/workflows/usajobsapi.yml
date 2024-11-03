@@ -52,7 +52,7 @@ jobs:
           git add usajobsdata-2.json
           git add usajobsdata-3.json
           git add usajobs_Health_Social_sciences.json
-          echo "jq '.SearchResult.SearchResultItems.MatchedObjectDescriptor.QualificationSummary="Test"' usajobsdata.json" > usajobsdata.json
+          echo "jq 'QualificationSummary="Test"' usajobsdata.json" > usajobsdata.json
           git commit -m "USA Jobs API fetching"
           git push
         env:
