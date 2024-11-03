@@ -39,6 +39,7 @@ jobs:
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=AF&Fields=min&SortField=location&RemoteIndicator=False&SortDirection=Asc&ResultsPerPage=9000' -o usajobsdata-2.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?Organization=AR&Fields=min&SortField=location&RemoteIndicator=False&SortDirection=Asc&ResultsPerPage=9000' -o usajobsdata-3.json
           curl -H "Host: data.usajobs.gov" -H "User-Agent: $SECRETAGENT" -H "Authorization-Key: $SECRETKEY" -H "Accept: application/json" 'https://data.usajobs.gov/api/search?JobCategoryCode=0180;0181;0185;0186;0187;0101;0102;0638;0685&Organization=DD;NV;AR;AF&SortField=location&SortDirection=Asc&ResultsPerPage=9000' -o usajobs_Health_Social_sciences.json
+          echo "`jq '.SearchResult.SearchResultItems.MatchedObjectDescriptor.QualificationSummary="Test"' usajobsdata.json`" > usajobsdata.json
           git config --global user.name "GitHub Action"
           git config --global user.email "devstoneapps@gmail.com"
           git add NV-AF-AR-Count.json
