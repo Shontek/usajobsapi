@@ -39,19 +39,12 @@ jobs:
 
       - name: Modify JSON file
         run: |
-          const fs = require('fs');
-          const filePath = 'usajobsdata.json';
-
-          // Read the JSON file
-          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-
-          // Remove the QualificationSummary object if it exists
-          if (data.QualificationSummary) {
-              delete data.QualificationSummary;
-          }
-
-          // Write the updated JSON back to the file
-          fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+          echo "const fs = require('fs');" > modify-json.js
+          echo "const filePath = 'usajobsdata.json';" >> modify-json.js
+          echo "const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));" >> modify-json.js
+          echo "if (data.QualificationSummary) { delete data.QualificationSummary; }" >> modify-json.js
+          echo "fs.writeFileSync(filePath, JSON.stringify(data, null, 2));" >> modify-json.js
+          node modify-json.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,4 +57,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
