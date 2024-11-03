@@ -59,7 +59,7 @@ jobs:
       - name: Modify JSON file
         run: |
           const fs = require('fs');
-          const filePath = './usajobsdata.json';
+          const filePath = 'usajobsdata.json';
 
           if (fs.existsSync(filePath)) {
               const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
