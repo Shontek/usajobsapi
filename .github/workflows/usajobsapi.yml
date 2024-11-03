@@ -60,8 +60,12 @@ jobs:
           echo "const fs = require('fs');" > modify-json.js
           echo "const filePath = 'usajobsdata.json';" >> modify-json.js
           echo "const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));" >> modify-json.js
-          echo "if (data.QualificationSummary) { delete data.QualificationSummary; }" >> modify-json.js
+          echo "data.SearchResult.SearchResultItems.forEach(item => {" >> modify-json.js
+          echo "    delete item.MatchedObjectDescriptor.OrganizationName;" >> modify-json.js
+          echo "});" >> modify-json.js
           echo "fs.writeFileSync(filePath, JSON.stringify(data, null, 2));" >> modify-json.js
+
+          # Run the Node.js script
           node modify-json.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
