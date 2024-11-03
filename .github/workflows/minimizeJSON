@@ -1,0 +1,56 @@
+name: Remove QualificationSummary
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:  
+    - cron:  '30 4 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  remove-qualification-summary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Specify the Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Modify JSON file
+        run: |
+          const fs = require('fs');
+          const filePath = 'usajobsdata.json';  // Change this to your JSON file path
+
+          // Read the JSON file
+          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+          // Remove the QualificationSummary object if it exists
+          if (data.QualificationSummary) {
+              delete data.QualificationSummary;
+          }
+
+          // Write the updated JSON back to the file
+          fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add usajobsdata.json  # Change this to your JSON file path
+          git commit -m "Remove QualificationSummary from JSON"
+          git push
