@@ -53,14 +53,13 @@ jobs:
           git add usajobsdata-2.json
           git add usajobsdata-3.json
           git add usajobs_Health_Social_sciences.json
-          echo "jq 'QualificationSummary="Test"' usajobsdata.json" > usajobsdata.json
           git commit -m "USA Jobs API fetching"
           git push
 
       - name: Modify JSON file
         run: |
           const fs = require('fs');
-          const filePath = 'usajobsdata.json';
+          const filePath = './usajobsdata.json';
 
           if (fs.existsSync(filePath)) {
               const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
